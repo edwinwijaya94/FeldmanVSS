@@ -34,8 +34,9 @@ public class ShamirScheme {
 //        for(long i=0; i<t-1; i++){
 //            polCoeff.add((long)(Math.random()*(q-1)));
 //        }
-        polCoeff.add((long)3);
-        polCoeff.add((long)3);
+        polCoeff.add((long)5);
+        polCoeff.add((long)2);
+        polCoeff.add((long)1);
     }
     
     public void generateXVal(){

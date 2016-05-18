@@ -21,23 +21,24 @@ public class FeldmanVSS {
         this.commitments = new ArrayList<>();
     }
     
-    public void setCommitments(ArrayList<Long> polCoeff){
+    public void setCommitments(long M, ArrayList<Long> polCoeff){
+        this.commitments.add((long)Math.pow(g, M));
         for(int i=0; i<polCoeff.size(); i++){
             this.commitments.add((long)Math.pow(g, polCoeff.get(i)));
         }
     }
     
-    public boolean verifyShare(long s){
+    public String verifyShare(long id, long s){
         long shareRes = ((long) Math.pow(g, s)) % p;
         
         long commitmentsRes = 1;
         for(int i=0; i<this.commitments.size(); i++){
-            commitmentsRes *= (long) Math.pow(commitments.get(i), Math.pow(s, i));
+            commitmentsRes *= ((long) Math.pow(commitments.get(i), Math.pow(id, i)) % p);
         }
         commitmentsRes %= p;
-        System.out.println("shareRes="+shareRes);
-        System.out.println("comRes="+commitmentsRes);
-        return (shareRes == commitmentsRes);
+//        System.out.println("shareRes="+shareRes);
+//        System.out.println("comRes="+commitmentsRes);
+        return (shareRes == commitmentsRes)? "valid" : "invalid";
     }
     
 }

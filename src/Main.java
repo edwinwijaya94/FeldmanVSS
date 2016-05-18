@@ -15,30 +15,33 @@ public class Main {
     
     public static void  main(String[] args){
         // share distribution
-        ShamirScheme S = new ShamirScheme(5, 0, 2, 2);
+        ShamirScheme S = new ShamirScheme(5, 2, 4, 4);
         S.doShamirScheme();
         S.printShares();
         
         //share verification
         FeldmanVSS F = new FeldmanVSS(11, 3);
-        ArrayList<Long> polCoeff = new ArrayList<>();
+//        ArrayList<Long> polCoeff = new ArrayList<>();
         Scanner reader = new Scanner(System.in);
         
-        System.out.println("received share: ");
+        System.out.println("ID partisipan: ");
+        long pid = reader.nextLong();
+        
+        System.out.println("share yang diterima : ");
         long share = reader.nextLong();
         
-        System.out.println("Commitments: ");
-        System.out.print("Enter secret: ");
-        long x = reader.nextLong();
-        polCoeff.add(x);
-        for(int i=0; i<S.polCoeff.size(); i++){
-            System.out.print("Enter coefficient-"+i+": ");
-            x = reader.nextLong();
-            polCoeff.add(x);
-        }
-        F.setCommitments(polCoeff);
-        boolean result = F.verifyShare(share); // verify share-0;
-        System.out.println("verification result: "+result);
+//        System.out.println("Commitments: ");
+//        System.out.print("Enter secret: ");
+//        long x = reader.nextLong();
+//        polCoeff.add(x);
+//        for(int i=0; i<S.polCoeff.size(); i++){
+//            System.out.print("Enter coefficient-"+i+": ");
+//            x = reader.nextLong();
+//            polCoeff.add(x);
+//        }
+        F.setCommitments(S.M, S.polCoeff);
+        String result = F.verifyShare(pid, share); 
+        System.out.println("hasil verifikasi: "+result);
     }
 }
 
